@@ -1,0 +1,12 @@
+export const SET_IDENTITY = 'SET_IDENTITY'; // //登陆身份采购商
+export const Set_Catalog = 'Set_Catalog'; // 获取商品菜单分类
+export const Is_Login = 'Is_Login'; // 是否登录
+export const Set_LoginForm = 'Set_LoginForm'; // 获取登录账号密码信息
+export const Set_ADDRESS = 'Set_ADDRESS'; // 获取登录账号密码信息
+export const Set_ACTIVE = 'Set_ACTIVE'; // 获取登录账号密码信息
+export const Set_USERNAME = 'Set_USERNAME'; //设置身份信息
+export const Set_loginType = 'Set_loginType'; //设置登录方式
+export const Set_homeSwipe = 'Set_homeSwipe'; //设置首页轮播
+export const Set_selImgs = 'Set_selImgs'; //设置行业精选
+export const Set_hotImgs = 'Set_hotImgs'; //设置热门品牌
+export const Set_sceneSwipe = 'Set_sceneSwipe'; //设置热门品牌
