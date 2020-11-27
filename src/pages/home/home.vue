@@ -10,7 +10,8 @@
                  </span>
              </span>
           <span>威购商城 </span>
-          <span class="textRight"> <van-icon @click.stop="toPath('/moreMsg')" name="comment-o"/> </span>
+          <!--@click.stop="toPath('/moreMsg')"-->
+          <span class="textRight"> <van-icon name="comment-o"/> </span>
         </div>
         <form class="search" action="">
           <van-search
