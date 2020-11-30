@@ -33,7 +33,7 @@
                   <p>
                     <van-stepper v-model="item.mOQ" theme="round"
                                  button-size="22"
-                                 disable-input/>
+                                 />
                   </p>
                 </div>
               </div>

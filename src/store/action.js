@@ -27,7 +27,6 @@ export default {
     };
     let data = await getImgs(params);
 
-
     if (name == '首页轮播图') {
       commit(Set_homeSwipe, data)
     } else if (name == '热门品牌') {

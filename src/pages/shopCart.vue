@@ -120,6 +120,7 @@
     },
     data() {
       return {
+        toast:null,
         active: 3, // 导航栏状态设置
         goodsData: [], //列表数据
         chooseGoods: [], // 选中商品数据
@@ -136,7 +137,7 @@
     methods: {
       getGoodsList() {  // 查询购物车
         let token = getlocalStorage("token");
-        const toast = Toast.loading({
+        this.toast = Toast.loading({
           duration: 0, // 持续展示 toast
           forbidClick: false,
           message: '数据加载中',
@@ -149,7 +150,7 @@
         }).then(res => {
           if (res.success) {
             this.goodsData = [];
-            toast.clear();
+            this.toast.clear();
             this.code = res.obj.model.code;
             res.obj.model.supplierCartVos.forEach(item => {
               item.status === "check" && this.updateRedisStatus(item.supplierId, false);
@@ -331,6 +332,7 @@
     mounted() {
     },
     destroyed() {
+      this.toast.clear();
       // this.goodsData.forEach(item => {
       //   this.updateRedisStatus(item.supplierId, false)
       // })

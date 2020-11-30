@@ -274,7 +274,7 @@
           },
           {
             name: '投诉建议',
-            path: ''
+            path: 'myComplaint'
           },
           {
             name: '关于我们',

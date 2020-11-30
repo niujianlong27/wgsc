@@ -119,8 +119,11 @@
                   :rules="item.rule"
                   rows="4"
                   type="textarea"
-                  maxlength="50"
+                  show-word-limit
+                  maxlength="2000"
                 >
+
+
                 </van-field>
               </template>
 
@@ -224,7 +227,7 @@
             eName: 'responseDesc',
             type: 'textarea',
             value: '',
-            placeholder: '请输入报名阐述',
+            placeholder: '请输入报名阐述,公司简介、业绩、优势等',
             rule: [{required: true, message: '请输入报名阐述'}]
           },
         ],
