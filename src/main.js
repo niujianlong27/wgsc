@@ -69,6 +69,13 @@ Vue.filter('fixNum', function (value) {
   return 0
 });
 
+
+Vue.filter('slice', function (value) {
+  let str = value.slice(5);
+  return str
+});
+
+
 Vue.filter('setDate', function (value) {
   let date = new Date(value);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
   let Y = date.getFullYear() + '-';

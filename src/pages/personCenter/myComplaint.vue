@@ -1,7 +1,7 @@
 <template>
   <div class="myComplaint textLeft">
     <page-nav :title="'投诉建议'"></page-nav>
-    <main @touchmove.prevent>
+    <main>
       <!--<div><img width="40px" src="../../assets/wgts.png" alt=""></div>-->
       <div>
         <h4>威高集团电子商务平台</h4>
@@ -87,17 +87,17 @@
 
               >
               </van-field>
-              <div class="Tips">
-                <h5 class="red"> 注意事项：</h5>
-                <p>
-                  被举报人（单位）信息：姓名、单位、职务信息需要填写完整。尽量做到一封投诉材料只反映一位被举报人问题。 反映的主要问题：分段书写每个涉嫌事实；内容尽量涵盖时间、地点、涉及人员、涉及主要证据等信息。
-                </p>
-              </div>
+
 
             </template>
 
           </template>
-
+          <div class="Tips">
+            <h5 class="red"> 注意事项：</h5>
+            <p>
+              被举报人（单位）信息：姓名、单位、职务信息需要填写完整。尽量做到一封投诉材料只反映一位被举报人问题。 反映的主要问题：分段书写每个涉嫌事实；内容尽量涵盖时间、地点、涉及人员、涉及主要证据等信息。
+            </p>
+          </div>
 
           <div style="margin-top: 36px">
             <van-button color="#171060" block type="info" native-type="submit">
@@ -288,8 +288,6 @@
   .myComplaint {
     background-color: #f5f5f5;
     main {
-      /*-webkit-box-sizing: border-box;*/
-      /*-moz-box-sizing: border-box;*/
       box-sizing: border-box;
       background-color: #f5f5f5;
       padding: 0 10px 30px;

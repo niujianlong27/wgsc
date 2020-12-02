@@ -190,8 +190,8 @@
             eName: 'linkmanName',
             type: 'text',
             value: '',
-            placeholder: '请输入客户名称',
-            rule: [{required: true, message: '请输入客户名称'}]
+            placeholder: '请输入联系人',
+            rule: [{required: true, message: '请输入联系人'}]
           },
 
           {

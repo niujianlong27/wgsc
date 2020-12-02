@@ -53,10 +53,15 @@ export default {
   advertList: `${environment.wgApp}portal/advertList`,//图片查询
   querySupplierStatus: `${environment.wgApp}rfq/notice/queryPreauditSupplierStatus`,//报名查询状态
   preauditSupplierAdd: `${environment.wgApp}rfq/notice/preauditSupplierAdd`,//报名
+  addWgSuggestLog: `${environment.wgApp}portal/addWgSuggestLog`,//意见反馈
 
+  // getNewSysNotice: `${environment.wgRfq}rfqRequest/getNewSysNotice`,//查询消息
+  sendMessage: `${environment.wgApp}portal/sendMessage`,//发送在线客服消息
+  queryMessage: `${environment.wgApp}portal/queryMessage`,//查询在线客服消息
+  cleanMessage: `${environment.wgApp}portal/cleanMessage`,//清除在线客服消息
 
-  getNewSysNotice: `${environment.wgRfq}rfqRequest/getNewSysNotice`,//查询消息
-
+  queryUserMessage: `${environment.wgApp}queryUserMessage`,//查询推送消息
+  queryUserMessageDetail: `${environment.wgApp}queryUserMessageDetail`,//查询推送消息详情
 
 
 }

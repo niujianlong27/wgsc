@@ -37,7 +37,7 @@ import noticeItem from '../pages/home/noticeItem';
 import aboutMe from '../pages/personCenter/aboutMe'
 import confirmReceipt from '../pages/personCenter/confirmReceipt'
 import afterService from '../pages/personCenter/afterService'
-
+import myComplaint from '../pages/personCenter/myComplaint'
 
 import {getlocalStorage, setSessionStorage, removeSessionStorage} from "../config/Utils";
 
@@ -390,7 +390,14 @@ const router = new Router({
         title: '关于我们',
       }
     },
-
+    {
+      path: '/myComplaint', //投诉建议
+      name: "myComplaint",
+      component: myComplaint,
+      meta: {
+        title: '投诉建议',
+      }
+    },
 
 
   ],
