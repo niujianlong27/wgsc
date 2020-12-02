@@ -22,14 +22,6 @@
     },
     mounted() {
       this.tencet = this.$route.query.tencet;
-      // let main = document.querySelector(".noticeItem main");
-      // let box = document.createElement("div");
-      // box.innerHTML = tencet;
-      // main.appendChild(box);
-      // let imgs = document.querySelectorAll(".noticeItem img");
-      // imgs.forEach(item => {
-      //   item.style.width = "100%"
-      // });
     }
   }
 </script>
@@ -44,7 +36,7 @@
       > div > > > img {
         width: 100%
       }
-      /*>>>*/
+
     }
   }
 </style>

@@ -60,8 +60,9 @@ export default {
   queryMessage: `${environment.wgApp}portal/queryMessage`,//查询在线客服消息
   cleanMessage: `${environment.wgApp}portal/cleanMessage`,//清除在线客服消息
 
-  queryUserMessage: `${environment.wgApp}queryUserMessage`,//查询推送消息
-  queryUserMessageDetail: `${environment.wgApp}queryUserMessageDetail`,//查询推送消息详情
+  queryUserMessage: `${environment.wgApp}portal/queryUserMessage`,//查询推送消息
+  queryUserMessageDetail: `${environment.wgApp}portal/queryUserMessageDetail`,//查询推送消息详情
+  queryUserMessageCount: `${environment.wgApp}portal/queryUserMessageCount`,//查询推送消息数量
 
 
 }

@@ -154,29 +154,6 @@
         this.searchData();
       },
 
-      // getNotice() {
-      //   http.post(urls.interface, { // 查询采购公告
-      //     url: "http://rfq.ouyeelbuy.com/api/rfqRequest/getNewSysNotice",
-      //     param_json: JSON.stringify({
-      //       page: this.page,
-      //       rows: "20",
-      //       noticeType: "1",
-      //       martSign: '50',
-      //       rfqMethod: this.rfqMethod,
-      //       type: "3,5,6,8,13",
-      //       ouName: this.ouName
-      //     })
-      //   }).then(res => {
-      //     this.isLoding = false;
-      //     let list = res.obj.list || [];
-      //     this.noticeList = this.noticeList.concat(list);
-      //     if (this.noticeList.length == res.obj.total) {
-      //       this.finished = true;
-      //     }
-      //
-      //   }).catch(err => {
-      //   });
-      // },
 
       searchData() { // 搜索
         let params = {
@@ -190,6 +167,7 @@
 
         http.post(urls.searchNotice, params).then(res => {
           this.isLoding = false;
+          this.loading = false;
           let list = res.list || [];
           this.noticeList = this.noticeList.concat(list);
           if (this.noticeList.length == res.total) {

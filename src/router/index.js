@@ -10,8 +10,10 @@ import setAddress from '../pages/home/setAddress'
 import resetPassword from '../pages/resetPassword'
 import receiptAddress from '../pages/receiptAddress'
 import noticeDetails from '../pages/home/noticeDetails'
+
 import noticeCategory from '../pages/home/noticeCategory'
 import moreMsg from '../pages/home/moreMsg'
+import msgDetails from '../pages/home/msgDetails'
 import sceneModel from '../pages/sceneModel/sceneModel'
 import senceDetails from '../pages/sceneModel/senceDetails'
 import chooseInvoice from '../pages/goodsType/chooseInvoice'
@@ -398,7 +400,14 @@ const router = new Router({
         title: '投诉建议',
       }
     },
-
+    {
+      path: '/msgDetails', //通知消息详情
+      name: "msgDetails",
+      component: msgDetails,
+      meta: {
+        title: '通知消息详情',
+      }
+    },
 
   ],
 });

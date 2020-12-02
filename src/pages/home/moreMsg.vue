@@ -3,83 +3,36 @@
     <page-nav :title="'消息通知'"></page-nav>
 
     <main>
-      <van-tabs @change="changeTabs()" sticky title-active-color="#1A1E75" color="#1A1E75" background="#F5F5F5"
-                v-model="active">
 
-        <van-tab title="通知公告">
-          <template v-if="isLoding">
-            <van-loading color="#1989fa" size="24px">数据加载中...</van-loading>
-          </template>
-          <template v-else>
-            <template v-if="newList.length > 0">
-
-              <section class="noticeList" v-for="item in newList" :key="item.id">
-                <div class="textLeft" @click="clickItem(item.tencet)">
-                  {{item.title}}
-                </div>
-                <div class="textLeft">
+      <template v-if="isLoding">
+        <van-loading color="#1989fa" size="24px">数据加载中...</van-loading>
+      </template>
+      <template v-else>
+        <template v-if="newList.length > 0">
+          <van-list
+            offset="100"
+            v-model="loading"
+            :finished="finished"
+            finished-text="没有更多了"
+            @load="onLoad"
+          >
+            <section class="noticeList" v-for="item in newList" :key="item.id">
+              <div class="textLeft" @click="clickItem(item.msgId)">
+                {{item.msgTitle}}
+              </div>
+              <div class="textLeft">
                   <span class="date right">
-                      {{item.createTime |  setDate}}
+                      {{item.sendTime |  setDate}}
                    </span>
-                </div>
-              </section>
+              </div>
+            </section>
+          </van-list>
 
-            </template>
-            <template v-else>
-              <van-empty description="暂无数据"/>
-            </template>
-          </template>
-        </van-tab>
-
-        <van-tab title="公司动态">
-          <template v-if="isLoding">
-            <van-loading color="#1989fa" size="24px">数据加载中...</van-loading>
-          </template>
-          <template v-else>
-            <template v-if="newList.length > 0">
-              <section class="noticeList" v-for="item in newList" :key="item.id">
-                <div class="textLeft" @click="clickItem(item.tencet)">
-                  {{item.title}}
-                </div>
-                <div class="textLeft">
-                  <span class="date right">
-                      {{item.createTime |  setDate}}
-                   </span>
-                </div>
-              </section>
-
-            </template>
-            <template v-else>
-              <van-empty description="暂无数据"/>
-            </template>
-          </template>
-
-        </van-tab>
-
-        <van-tab title="政策法规">
-          <template v-if="isLoding">
-            <van-loading color="#1989fa" size="24px">数据加载中...</van-loading>
-          </template>
-          <template v-else>
-            <template v-if="newList.length > 0">
-
-              <section class="noticeList" v-for="item in newList" :key="item.id">
-                <div class="textLeft" @click="clickItem(item.tencet)">
-                  {{item.title}}
-                </div>
-                <div class="textLeft">
-                  <span class="date right">
-                      {{item.createTime |  setDate}}
-                   </span>
-                </div>
-              </section>
-            </template>
-            <template v-else>
-              <van-empty description="暂无数据"/>
-            </template>
-          </template>
-        </van-tab>
-      </van-tabs>
+        </template>
+        <template v-else>
+          <van-empty description="暂无数据"/>
+        </template>
+      </template>
 
     </main>
   </div>
@@ -104,7 +57,8 @@
     },
     data() {
       return {
-        pagesNum: 1,
+        pageSize: 30,
+        page: 1,
         noType: '01', // 消息分类
         isLoding: false,//整个页面加载
         loading: false,//数据滚动加载
@@ -115,41 +69,34 @@
     },
     methods: {
       clickItem(data) { // 点击公告item
-        this.$router.push({path: 'noticeItem', query: {tencet: data}})
+        this.$router.push({path: 'msgDetails', query: {id: data}})
       },
+      onLoad() {
+        this.page += 1;
+        this.getNotices();
+      },
+
       getNotices() {
-        http.get(urls.queryNoticeList, { // 查询最新公告
-          noType: this.noType,
-          pagesNum: this.pagesNum
+        http.get(urls.queryUserMessage, { // 查询最新公告
+          domainCode: 'beps',
+          page: this.page,
+          rows: this.pageSize
         }).then(res => {
           this.isLoding = false;
-          this.newList = res.noticeList;
+          this.loading = false;
+          let list = res.datas.rows || [];
+          this.newList = this.newList.concat(list);
+          if (this.newList.length == res.count) {
+            this.finished = true;
+          }
         }).catch(err => {
         });
       },
 
-
-      changeTabs() { // 切换
-        switch (this.active) {
-          case 0:
-            this.noType = "01"; //通知公告
-            break;
-          case 1:
-            this.noType = "02"; // 公司动态
-            break;
-          case 2:
-            this.noType = "03"; //政策法规
-            break;
-        }
-        this.pagesNum = 1;
-        this.isLoding = true;
-        this.newList = [];
-        // this.getNotices();
-      },
     },
     mounted() {
-      // this.isLoding = true;
-      // this.getNotices()
+      this.isLoding = true;
+      this.getNotices()
     }
   }
 </script>

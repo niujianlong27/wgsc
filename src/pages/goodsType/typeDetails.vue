@@ -302,8 +302,8 @@
         supplierNameSel: '', // 供应商字段
         className: '',//类别字段
         commodityBrand: '',// 品牌字段
-        companyNews:'1', // 供应商简介
-        companyName:'1',// 供应商名称
+        companyNews: '1', // 供应商简介
+        companyName: '1',// 供应商名称
         option1: [
           {text: '全部', value: 0},
           {text: '有编码商品', value: 1},
@@ -449,8 +449,8 @@
           } else {
             this.listNamePPDeep = this.listNamePP
           }
-          this.companyName =  res.companyName;
-          this.companyNews =  res.companyNews;
+          this.companyName = res.companyName;
+          this.companyNews = res.companyNews;
           this.goodsList = this.goodsList.concat(list);
           this.isLoding = false;
         }).catch(err => {
@@ -576,7 +576,7 @@
       this.keyword = this.$route.query.searchValue || "";
       this.goodsList = [];
       this.isLoding = true;
-      console.log(this.$route.query.typeId);
+
       if (this.$route.query.typeId) { // 从供应商菜单京东 震坤行
         this.supplierNameSel = this.$route.query.typeId;
         this.getGoodsList(); // 分页查询接口
@@ -593,16 +593,16 @@
   @import 'src/style/common';
 
   .typeDetails {
-    .company{
+    .company {
       text-align: left;
       padding: 0 5px;
-      span{
+      span {
         letter-spacing: 0.6px;
         display: block;
         line-height: 25px;
         @include sc(15px, #5f5f5f);
-        &:first-child{
-          color:#0b0b84;
+        &:first-child {
+          color: #0b0b84;
           font-weight: 600
         }
 

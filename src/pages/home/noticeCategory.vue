@@ -126,7 +126,7 @@
           pagesNum: this.pagesNum
         }).then(res => {
           this.isLoding = false;
-          this.newList = res.noticeList;
+          this.newList = res.noticeList || [];
         }).catch(err => {
         });
       },

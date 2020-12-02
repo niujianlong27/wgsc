@@ -10,7 +10,8 @@
                  </span>
              </span>
           <span>威购商城 </span>
-          <span class="textRight"> <van-icon @click.stop="toPath('/moreMsg')" name="comment-o"/> </span>
+          <span class="textRight"> <van-icon :badge="messageCount" @click.stop="toPath('/moreMsg')"
+                                             name="comment-o"/> </span>
         </div>
         <form class="search" action="">
           <van-search
@@ -20,9 +21,8 @@
             placeholder="请输入商品品类、名称、供应商、品牌"
             :left-icon="require('../../assets/Microphone.png')"
             :right-icon="require('../../assets/Find.png')"
-            @search="clickRight"
-            @click-left-icon="clickLeft"
-            @click-right-icon="clickRight"
+            @search="clickImg(searchValue)"
+            @click-right-icon="clickImg(searchValue)"
           />
         </form>
       </nav>
@@ -96,7 +96,7 @@
               <template v-for="item in selectImgs">
                 <van-grid-item>
                   <template v-if="selImgs.length > 0">
-                    <img  @click="clickImg(item.link)" width="100%" :src="item.url | imgSet"/>
+                    <img @click="clickImg(item.link)" width="100%" :src="item.url | imgSet"/>
                   </template>
                   <template v-else>
                     <img width="100%" :src="item"/>
@@ -173,7 +173,7 @@
     },
     data() {
       return {
-
+        messageCount: '',
         searchValue: '',
         showArea: false,// 选择地区
         searchAreaName: "", // 选择地区缓存
@@ -262,26 +262,13 @@
         this.searchAreaName = arr.join('/');
         this.searchAreaCode = arrCode.join('_');
 
-        setSessionStorage('filterAddress', this.searchAreaName);
-        setSessionStorage('filterAddressCode', this.searchAreaCode);
+        setSessionStorage('filterAddress', this.searchAreaName);  // 定位地址
+        setSessionStorage('filterAddressCode', this.searchAreaCode); // 定位地址code
         this.showArea = false;
       },
 
-
-      clickLeft() { // 点击麦克风
-        // if (this.ready == null) {
-        //   return;
-        // }
-        // this.ready.record({filename: "_doc/audio/"}, function () {
-        // }, function (e) {
-        // });
-      },
       clickImg(data) {
-        this.$router.push({path: '/typeDetails', query: {searchValue:data}});
-      },
-
-      clickRight() {
-        this.$router.push({path: '/typeDetails', query: {searchValue: this.searchValue}});
+        this.$router.push({path: '/typeDetails', query: {searchValue: data}});
       },
 
       toPath(url, data) {
@@ -292,9 +279,6 @@
         this.$router.push(url)
       },
 
-      // plusReady() {
-      //   this.ready = plus.webview.currentWebview();
-      // },
 
       getArea(level, code) { // 查询省市区乡
         http.post(urls.queryArea, {areaLevel: level, areaFid: code}).then(res => {
@@ -353,22 +337,13 @@
         })
       },
 
-      // getNoticeType() {
-      //   http.post(urls.interface, { // 查询采购公告
-      //     url: urls.getNewSysNotice,
-      //     param_json: JSON.stringify({
-      //       page: "1",
-      //       rows: "8",
-      //       noticeType: "1",
-      //       martSign: '50',
-      //       rfqMethod: "RAQ",
-      //       type: "3,5,6,8,13"
-      //     })
-      //   }).then(res => {
-      //     this.buyNoticeList = [res.obj.list[0], res.obj.list[1], res.obj.list[2]]
-      //   }).catch(err => {
-      //   });
-      // },
+      getMessageCount() {
+        http.get(urls.queryUserMessageCount, {domainCode: 'beps'}).then(res => {
+          this.messageCount = res
+        }).catch(err => {
+
+        })
+      },
 
       handleScrollTop() { // 回到顶部
         window.scrollTo(0, 0);
@@ -377,7 +352,8 @@
 
     mounted() {
       this.getNewList();// 查询最新共公告
-      this.getNoticeType()
+      this.getNoticeType();
+      this.getMessageCount();// 查询最新共公告
     },
 
     beforeUpdate() {
@@ -387,7 +363,9 @@
     },
 
     activated() {
+      this.getMessageCount();// 查询最新共公告
       this.getNoticeType();
+
       this.images = this.homeSwipe.length > 0 ? this.homeSwipe : this.image;
       this.hotImg = this.hotImgs.length > 0 ? this.hotImgs : this.hotImg;
       this.selectImgs = this.selImgs.length > 0 ? this.selImgs : this.selectImgs;
@@ -400,12 +378,6 @@
 
     created() {
       this.getArea(1, ""); // 查询地区
-      // // 扩展API是否准备好，如果没有则监听“plusready"事件
-      // if (window.plus) {
-      //   this.plusReady()
-      // } else {
-      //   document.addEventListener('plusready', this.plusReady, false) //
-      // }
     }
 
   }
