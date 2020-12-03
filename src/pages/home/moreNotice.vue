@@ -117,10 +117,8 @@
           {text: '综合组合', value: 'DAC'},
         ],
 
-        statementName: '',
         noticeList: [],
         value: '',
-        columns: ['杭州', '宁波', '温州', '嘉兴', '湖州'],
         showPicker: false,
         isLoding: true,
         loading: false,//数据滚动加载
@@ -181,8 +179,6 @@
 
     },
     mounted() {
-      // this.getNotice();
-
       this.searchData();
     }
   }

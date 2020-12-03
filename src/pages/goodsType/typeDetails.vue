@@ -144,7 +144,7 @@
               <span v-if="companyNews">{{companyNews}}</span>
             </div>
             <van-list
-              offset="150"
+              offset="200"
               v-model="loading"
               :finished="finished"
               finished-text="没有更多了"
@@ -480,8 +480,8 @@
         };
         http.post(`${urls.queryCommodity}?ajaxCmd=classTable`, params).then(res => {
           if (res.success) {
-            console.log(this.goodsList.length);
-            console.log(res.obj.model.records);
+            // console.log(this.goodsList.length);
+            // console.log(res.obj.model.records);
             let list = res.obj.model.commodityVos || [];
             this.goodsList = this.goodsList.concat(list);
             this.loading = false;
