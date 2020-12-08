@@ -339,7 +339,12 @@
 
       getMessageCount() {
         http.get(urls.queryUserMessageCount, {domainCode: 'beps'}).then(res => {
-          this.messageCount = res
+          if (res == '系统异常，请联系运营商！') {
+            this.messageCount = ''
+          } else {
+            this.messageCount = res
+          }
+
         }).catch(err => {
 
         })
