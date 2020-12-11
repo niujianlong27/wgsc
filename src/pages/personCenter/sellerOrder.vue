@@ -206,6 +206,7 @@
       },
 
       changeTabs() { // 切换
+        this.finished = false;
         this.page = 1;
         this.isLoding = true;
         this.orderList = [];

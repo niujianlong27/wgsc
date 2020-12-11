@@ -13,17 +13,24 @@
           <template v-else>
             <template v-if="newList.length > 0">
 
-              <section class="noticeList" v-for="item in newList" :key="item.id">
-                <div class="textLeft" @click="clickItem(item.tencet)">
-                  {{item.title}}
-                </div>
-                <div class="textLeft">
+              <van-list
+                offset="100"
+                v-model="loading"
+                :finished="finished"
+                finished-text="没有更多了"
+                @load="onLoad"
+              >
+                <section class="noticeList" v-for="item in newList" :key="item.id">
+                  <div class="textLeft" @click="clickItem(item.tencet)">
+                    {{item.title}}
+                  </div>
+                  <div class="textLeft">
                   <span class="date right">
                       {{item.createTime |  setDate}}
                    </span>
-                </div>
-              </section>
-
+                  </div>
+                </section>
+              </van-list>
             </template>
             <template v-else>
               <van-empty description="暂无数据"/>
@@ -38,18 +45,25 @@
           <template v-else>
             <template v-if="newList.length > 0">
 
+              <van-list
+                offset="100"
+                v-model="loading"
+                :finished="finished"
+                finished-text="没有更多了"
+                @load="onLoad"
+              >
 
-              <section class="noticeList" v-for="item in newList" :key="item.id">
-                <div class="textLeft" @click="clickItem(item.tencet)">
-                  {{item.title}}
-                </div>
-                <div class="textLeft">
+                <section class="noticeList" v-for="item in newList" :key="item.id">
+                  <div class="textLeft" @click="clickItem(item.tencet)">
+                    {{item.title}}
+                  </div>
+                  <div class="textLeft">
                   <span class="date right">
                       {{item.createTime |  setDate}}
                    </span>
-                </div>
-              </section>
-
+                  </div>
+                </section>
+              </van-list>
             </template>
             <template v-else>
               <van-empty description="暂无数据"/>
@@ -65,16 +79,25 @@
           <template v-else>
             <template v-if="newList.length > 0">
 
-              <section class="noticeList" v-for="item in newList" :key="item.id">
-                <div class="textLeft" @click="clickItem(item.tencet)">
-                  {{item.title}}
-                </div>
-                <div class="textLeft">
+              <van-list
+                offset="100"
+                v-model="loading"
+                :finished="finished"
+                finished-text="没有更多了"
+                @load="onLoad"
+              >
+                <section class="noticeList" v-for="item in newList" :key="item.id">
+                  <div class="textLeft" @click="clickItem(item.tencet)">
+                    {{item.title}}
+                  </div>
+                  <div class="textLeft">
                   <span class="date right">
                       {{item.createTime |  setDate}}
                    </span>
-                </div>
-              </section>
+                  </div>
+                </section>
+
+              </van-list>
             </template>
             <template v-else>
               <van-empty description="暂无数据"/>
@@ -117,6 +140,11 @@
       }
     },
     methods: {
+      onLoad() {
+        this.pagesNum += 1;
+        this.getNotices();
+      },
+
       clickItem(data) { // 点击公告item
         this.$router.push({path: 'noticeItem', query: {tencet: data}})
       },
@@ -126,7 +154,14 @@
           pagesNum: this.pagesNum
         }).then(res => {
           this.isLoding = false;
-          this.newList = res.noticeList || [];
+          this.loading = false;
+          let list = res.noticeList || [];
+          this.newList = this.newList.concat(list);
+          console.log(res.noticeList);
+          if (res.noticeList.length == 0) {
+            this.finished = true;
+          }
+
         }).catch(err => {
         });
       },
@@ -144,6 +179,7 @@
             this.noType = "03"; //政策法规
             break;
         }
+        this.finished = false;
         this.pagesNum = 1;
         this.isLoding = true;
         this.newList = [];
@@ -185,9 +221,10 @@
     background: rgba(255, 255, 255, 1);
     border-radius: 5px;
     > div {
-      flex: 1;
+
       line-height: 44px;
       &:first-child {
+        flex: 2;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -195,6 +232,7 @@
         @include sc(14px, rgba(31, 31, 31, 1));
       }
       &:last-child {
+        flex: 1;
         @include sc(12px, rgba(122, 122, 122, 1));
         .date {
           margin-right: 20px;

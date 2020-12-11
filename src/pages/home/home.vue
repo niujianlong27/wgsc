@@ -261,7 +261,6 @@
 
         this.searchAreaName = arr.join('/');
         this.searchAreaCode = arrCode.join('_');
-
         setSessionStorage('filterAddress', this.searchAreaName);  // 定位地址
         setSessionStorage('filterAddressCode', this.searchAreaCode); // 定位地址code
         this.showArea = false;
