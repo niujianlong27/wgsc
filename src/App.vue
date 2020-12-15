@@ -56,26 +56,30 @@
       },
 
       startUp() {
+
+        // let url ='http://www.iewego.com/wg-dist/?userName=null%20%E4%B8%9B%E4%BD%B3%E4%BD%B3&access_token=a44573bd-a4f8-4cb7-8f76-f24cd3221d1f&appCode=WG&flag=wg&signMix=a68525846763432bd580908d802'
         let url = window.location.href;  // 获取页面url
         let arr = url.split('/');
         let str = `/${arr[arr.length - 1]}`; // 获取登录的页面路由
         this.setActive(str); // 设置底部组件的显示
-
         if (url.includes("access_token")) { // 判断url中存在access_token
           let istrue = true; // 设置true值  根据是否有userName 改变
-          let urlArr = url.split("&"); // 根据& 剪切成数组
+          let urlArr = url.split("&");
 
-          urlArr.forEach(item => {  // 循环
+          urlArr.forEach(item => {
 
             if (item.includes('userName')) { // 有userName 字段进入判断
               let arr = item.split("="); // 以等号转换成数组
               let str2 = decodeURIComponent(arr[1]); //反编译转换成汉字
               let nameArr = str2.split("+");   // 以 + 转换成数组
+
               if (nameArr[0].includes('null')) {  // null 字段进入判断
-                removelocalStorage("token"); // 移除token
-                istrue = false  //  userName 为 null； istrue 设置为false 不进入下面判断
+                // Toast('工号获取失败，请重新登录！')
+                removelocalStorage("token"); // 移除token 会跳转首页提示登录
+                istrue = false;  //  userName 为 null； istrue 设置为false 不进入下面判断
+                // this.$route.push('/signIn')
               }
-              this.Set_USERNAME(str2.replace(/\+/ig, " "))
+              this.Set_USERNAME(str2.replace(/\+/ig, " "))  // 设置用户名
             }
 
             if (item.includes("access_token") && istrue) { //当前item 中存在access_token

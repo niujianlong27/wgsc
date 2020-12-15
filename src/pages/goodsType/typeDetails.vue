@@ -545,9 +545,14 @@
           Toast('最高价需大于最低价!');
           return
         }
-        setSessionStorage('filterAddress', this.searchAreaName);
-        setSessionStorage('filterAddressCode', this.searchAreaCode);
-
+        if (this.supplierNameSel == 'jd') {
+          if (!this.searchAreaCode) {
+            getSessionStorage('filterAddressCode') && (this.searchAreaCode = getSessionStorage('filterAddressCode'));
+          } else {
+            setSessionStorage('filterAddress', this.searchAreaName);
+            setSessionStorage('filterAddressCode', this.searchAreaCode);
+          }
+        }
         this.page = 1;
         this.goodsList = [];
         this.isLoding = true;
@@ -570,7 +575,6 @@
 
     mounted() {
       getSessionStorage('filterAddress') && (this.searchAreaName = getSessionStorage('filterAddress'));
-
       this.getArea(1, "")  // 查询地区
       this.isLogin = getlocalStorage("token") ? true : false;
       this.keyword = this.$route.query.searchValue || "";
