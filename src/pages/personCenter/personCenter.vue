@@ -7,7 +7,7 @@
           <p class="left">
             <span>{{leftText}}</span>
             <span @click.stop="change"></span>
-            <span style="font-size: 12px">{{rightText}}</span>
+            <span class="font">{{rightText}}</span>
           </p>
           <p class="right">
             <img @click.stop="showPopup" src="../../assets/Setup.png" alt="">
@@ -23,7 +23,7 @@
           <template v-if="isLogin">
             <p>
               <span></span>
-              <span style="font-size: 12px">{{userName ? userName : userInfo.loginName}}</span>
+              <span class="font">{{userName ? userName : userInfo.loginName}}</span>
             </p>
             <p>{{userInfo.companyName}}</p>
           </template>
@@ -519,6 +519,9 @@
         padding: 0 8px;
         @include wh(100px, 30px);
       }
+    }
+    .font{
+      font-size: 12px!important;
     }
   }
 
