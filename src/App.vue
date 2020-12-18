@@ -1,10 +1,6 @@
 <template>
   <div id="app">
 
-    <!--<transition :name="transitionName">-->
-    <!--<router-view class="Router"></router-view>-->
-    <!--</transition>-->
-
     <!-- 这里是需要keepalive的 -->
     <keep-alive>
       <router-view class="Router" v-if="$route.meta.keepAlive"></router-view>
@@ -64,10 +60,10 @@
         let arr = url.split('/');
         let str = `/${arr[arr.length - 1]}`; // 获取登录的页面路由
         this.setActive(str); // 设置底部组件的显示
-        if (url.includes("access_token")) { // 判断url中存在access_token
+        if (url.includes("access_token")) { // 判断url中存在access_token 是单点登录
 
-          removelocalStorage("userInfo");  // 先移除localstorage
-          removelocalStorage("token");  // 先移除localstorage
+          removelocalStorage("userInfo");  // 先移除用户信息
+          removelocalStorage("token");  // 先移除token
 
           let istrue = true; // 设置true值  根据是否有userName 改变
           let urlArr = url.split("&");
