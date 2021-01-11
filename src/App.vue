@@ -90,7 +90,7 @@
               this.Set_loginType('dandian'); // 设置单点
 
               const toast = Toast.loading({
-                duration: 1500, // 持续展示 toast
+                duration: 1000, // 持续展示 toast
                 forbidClick: true,
                 message: '数据加载中',
               });

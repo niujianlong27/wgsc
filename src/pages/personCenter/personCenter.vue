@@ -338,6 +338,8 @@
       Jump(url) { // 我的应用跳转
         this.$router.push(url);
       },
+
+
       getCountByPurchase() {  //获取采购商各状态订单数接口
         http.post(urls.searchOderCountByPurchase, {}).then(res => {
           if (res.success) {

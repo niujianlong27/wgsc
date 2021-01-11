@@ -14,7 +14,7 @@
       </section>
       <section v-else>
         <van-cell :title="'收货地址'"
-                  is-link @click="toPath('/receiptAddress')"/>
+                  is-link @click="toPath('/receiptAddress',{form:'orderConfirm'})"/>
       </section>
 
       <section>

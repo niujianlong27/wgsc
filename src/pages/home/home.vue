@@ -357,7 +357,7 @@
     mounted() {
       this.getNewList();// 查询最新共公告
       this.getNoticeType();
-      this.getMessageCount();// 查询最新共公告
+      this.getMessageCount();// 查询最新共公告书鲁昂
     },
 
     beforeUpdate() {
