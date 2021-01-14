@@ -421,6 +421,12 @@ router.beforeEach((to, from, next) => {
     }
   }
   const title = to.meta && to.meta.title;
+  if (getlocalStorage('token')  &&  to.path == '/signIn') {
+    window.plus && plus.runtime.quit(); //有token 并且要去注册或登录页面那么就退出app
+    return
+  }
+
+
   if (title) {
     document.title = title;
   }

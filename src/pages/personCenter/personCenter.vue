@@ -136,7 +136,7 @@
     <van-popup class="popup" v-model="show2">
       <p style="text-align: center;font-size: 18px">确认登出？</p>
       <van-button @click="show2 = false" type="primary">取消</van-button>
-      <van-button @click="Jump('/signIn')" type="info">确认</van-button>
+      <van-button @click="signOutJump('/signIn')" type="info">确认</van-button>
     </van-popup>
 
   </div>
@@ -147,8 +147,8 @@
   import headerNav from '../../components/headerNav'
   import foot from '../../components/foot'
   import {Grid, GridItem, Image, Button, Cell, Toast, Popup, Icon} from 'vant';
-  import {mapState, mapMutations} from 'vuex'
-  import {getlocalStorage} from "../../config/Utils";
+  import {mapState,mapMutations} from 'vuex'
+  import {getlocalStorage,removelocalStorage} from "../../config/Utils";
   import http from '../../utils/http';
   import urls from '../../utils/urls';
 
@@ -336,6 +336,13 @@
       },
 
       Jump(url) { // 我的应用跳转
+        this.$router.push(url);
+      },
+
+      signOutJump(url) { //
+        removelocalStorage("token");
+        removelocalStorage("userInfo");
+
         this.$router.push(url);
       },
 

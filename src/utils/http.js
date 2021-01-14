@@ -52,6 +52,10 @@ axios.interceptors.response.use( // 响应数据设置
     }
 
     if ((response.data instanceof Object) && !response.data.success && response.data.msg && (response.data.msg.indexOf("登录") != -1 || response.data.msg.indexOf("登陆") != -1)) {
+
+      removelocalStorage("token");
+      removelocalStorage("userInfo");
+
       router.push('/signIn');
     }
 
