@@ -40,6 +40,8 @@ import aboutMe from '../pages/personCenter/aboutMe'
 import confirmReceipt from '../pages/personCenter/confirmReceipt'
 import afterService from '../pages/personCenter/afterService'
 import myComplaint from '../pages/personCenter/myComplaint'
+import privacyNotice from '../pages/personCenter/privacyNotice'
+
 
 import {getlocalStorage, setSessionStorage, removeSessionStorage} from "../config/Utils";
 
@@ -384,6 +386,15 @@ const router = new Router({
         title: '关于我们',
       }
     },
+    {
+      path: '/privacyNotice', //隐私政策
+      name: "privacyNotice",
+      component: privacyNotice,
+      meta: {
+        title: '隐私政策',
+      }
+    },
+
     {
       path: '/afterService', //售后中心
       name: "afterService",
