@@ -97,10 +97,10 @@
     </main>
     <footer v-show="hideshow">
       <template v-if="active == 0">
-        <span>用户登陆手册</span>
+        <span>用户登录手册</span>
       </template>
       <template v-else>
-        <span @touchstart.stop="active = 0">去登陆</span>
+        <span @touchstart.stop="active = 0">去登录</span>
       </template>
     </footer>
   </div>

@@ -109,7 +109,6 @@
     },
     created() {
       this.startUp();
-
       this.setImgs('首页轮播图'); // 查询图片
       this.setImgs('热门品牌');
       this.setImgs('行家精选');
@@ -120,6 +119,7 @@
       removelocalStorage('userName'); // 移除userName缓存
 
       this.getCatalogList();
+      this.getAddress();
     },
     mounted() {
       if (getlocalStorage("userInfo")) {
