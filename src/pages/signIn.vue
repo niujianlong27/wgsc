@@ -1,113 +1,118 @@
 <template>
   <div class="signIn">
     <div style="padding: 15px" class="textLeft">
-      <span><van-icon @click.stop="toPath()" name="arrow-left" size="22" /></span>
+      <span><van-icon @click.stop="toPath('/home')" name="arrow-left" size="22"/></span>
     </div>
     <header>
       <img src="../assets/logo.png" alt="">
     </header>
     <main>
-      <van-tabs color="#121314" :border="false" @change="tabChange" swipeable v-model="active">
-        <van-tab title="登录">
-          <section>
-            <van-form @submit="onSubmit">
-              <van-field
-                v-model="loginData.userLoginNo"
-                name="userLoginNo"
-                required
-                left-icon="user-o"
-                placeholder="用户名"
-                :error="false"
-                :rules="[{ required: true, message: '请输入用户名' }]"
-              />
-              <van-field
-                v-model="loginData.userLoginPsd"
-                type="password"
-                name="userLoginPsd"
-                left-icon="coupon-o"
-                required
-                :error="false"
-                placeholder="密码"
-                :rules="[{ required: true, message: '请输入密码' }]"
-              />
-              <div style="margin: 16px 0">
-                <van-button color="#171060" block type="info" native-type="submit">
-                  确认登录
-                </van-button>
-              </div>
-            </van-form>
-            <p><span @click.stop="resetPassword">忘记密码?</span></p>
-          </section>
+      <!--<van-tabs color="#121314" :border="false" @change="tabChange" swipeable v-model="active">-->
+      <!--<van-tab title="登录">-->
+      <section>
+        <van-form @submit="onSubmit">
+          <van-field
+            v-model="loginData.userLoginNo"
+            name="userLoginNo"
+            required
+            left-icon="user-o"
+            placeholder="用户名"
+            :error="false"
+            :rules="[{ required: true, message: '请输入用户名' }]"
+          />
+          <van-field
+            v-model="loginData.userLoginPsd"
+            type="password"
+            name="userLoginPsd"
+            left-icon="coupon-o"
+            required
+            :error="false"
+            placeholder="密码"
+            :rules="[{ required: true, message: '请输入密码' }]"
+          />
+          <div style="margin: 16px 0">
+            <van-button color="#171060" block type="info" native-type="submit">
+              确认登录
+            </van-button>
+          </div>
+        </van-form>
+        <!--<p><span @click.stop="resetPassword">忘记密码?</span></p>-->
+      </section>
 
-        </van-tab>
+      <!--</van-tab>-->
 
 
-        <van-tab title="注册">
-          <van-form @submit="register" v-model="signInData" ref="signIn">
-            <van-field
-              v-model="signInData.username"
-              name="userLoginNo"
-              required
-              left-icon="user-o"
-              placeholder="注册账号"
-              :error="false"
-              :rules="[{ required: true, message: '请输入注册账号' }]"
-            />
-            <van-field
-              v-model="signInData.password"
-              type="password"
-              name="userLoginPsd"
-              left-icon="coupon-o"
-              required
-              :error="false"
-              :rules="signInRule.password"
-              placeholder="密码"
-            />
-            <van-field
-              v-model="signInData.checkPassword"
-              required
-              :error="false"
-              type="password"
-              name="checkPassword"
-              left-icon="coupon-o"
-              :error-message="errorMessage"
-              :rules="signInRule.checkPassword"
-              placeholder="确认密码"
+      <!--<van-tab title="注册">-->
+      <!--<van-form @submit="register" v-model="signInData" ref="signIn">-->
+      <!--<van-field-->
+      <!--v-model="signInData.username"-->
+      <!--name="userLoginNo"-->
+      <!--required-->
+      <!--left-icon="user-o"-->
+      <!--placeholder="注册账号"-->
+      <!--:error="false"-->
+      <!--:rules="[{ required: true, message: '请输入注册账号' }]"-->
+      <!--/>-->
+      <!--<van-field-->
+      <!--v-model="signInData.password"-->
+      <!--type="password"-->
+      <!--name="userLoginPsd"-->
+      <!--left-icon="coupon-o"-->
+      <!--required-->
+      <!--:error="false"-->
+      <!--:rules="signInRule.password"-->
+      <!--placeholder="密码"-->
+      <!--/>-->
+      <!--<van-field-->
+      <!--v-model="signInData.checkPassword"-->
+      <!--required-->
+      <!--:error="false"-->
+      <!--type="password"-->
+      <!--name="checkPassword"-->
+      <!--left-icon="coupon-o"-->
+      <!--:error-message="errorMessage"-->
+      <!--:rules="signInRule.checkPassword"-->
+      <!--placeholder="确认密码"-->
 
-            />
-            <van-field
-              v-model="signInData.email"
-              type="email"
-              name="email"
-              left-icon="envelop-o"
-              required
-              :error="false"
-              placeholder="邮箱地址"
-              :rules="[{ required: true, message: '请输入邮箱地址' }]"
-            />
-            <div style="margin: 16px 0">
-              <van-button color="#171060" block type="info" native-type="submit">
-                确认注册
-              </van-button>
-            </div>
-          </van-form>
+      <!--/>-->
+      <!--<van-field-->
+      <!--v-model="signInData.email"-->
+      <!--type="email"-->
+      <!--name="email"-->
+      <!--left-icon="envelop-o"-->
+      <!--required-->
+      <!--:error="false"-->
+      <!--placeholder="邮箱地址"-->
+      <!--:rules="[{ required: true, message: '请输入邮箱地址' }]"-->
+      <!--/>-->
+      <!--<div style="margin: 16px 0">-->
+      <!--<van-button color="#171060" block type="info" native-type="submit">-->
+      <!--确认注册-->
+      <!--</van-button>-->
+      <!--</div>-->
+      <!--</van-form>-->
 
-        </van-tab>
-      </van-tabs>
+      <!--</van-tab>-->
+      <!--</van-tabs>-->
     </main>
     <footer v-show="hideshow">
-      <template v-if="active == 0">
-        <span>用户登录手册</span>
-      </template>
-      <template v-else>
-        <span @touchstart.stop="active = 0">去登录</span>
-      </template>
+
+      <!--<footer v-show="hideshow">-->
+      <van-checkbox label-disabled v-model="radio"><span>登录即同意 <span class="privacy" @click="toPath('/privacyNotice')">《 隐私政策 》</span></span></van-checkbox>
+      <!--</footer>-->
+      <!--<template v-if="active == 0">-->
+      <!--&lt;!&ndash;<span>用户登录手册</span>&ndash;&gt;-->
+      <!--</template>-->
+      <!--<template v-else>-->
+      <!--<span @touchstart.stop="active = 0">去登录</span>-->
+      <!--</template>-->
     </footer>
+
   </div>
 </template>
 
 <script>
-  import {Tab,Icon, Tabs, Form, Field, Button, Toast} from 'vant';
+  import {Tab, Icon, Tabs, Form, Field, Button, Toast, Checkbox, Popup} from 'vant';
   import {setlocalStorage, getlocalStorage, removelocalStorage} from '../config/Utils'
   import http from '../utils/http';
   import urls from '../utils/urls';
@@ -116,7 +121,10 @@
   export default {
     name: "signIn",
     components: {
+
+      [Checkbox.name]: Checkbox,
       [Icon.name]: Icon,
+      [Popup.name]: Popup,
       [Tab.name]: Tab,
       [Tabs.name]: Tabs,
       [Form.name]: Form,
@@ -146,6 +154,8 @@
         }
       };
       return {
+        radio: true,
+        show: false,
         docmHeight: document.documentElement.clientHeight,  //默认屏幕高度
         showHeight: document.documentElement.clientHeight,   //实时屏幕高度
         hideshow: true, //显示或者隐藏footer
@@ -161,13 +171,13 @@
           checkPassword: '',
           email: ''
         },
-        signInRule: { //提示信息
+        signInRule: {
           password: [{required: true, message: "请输入密码", validator: validatePass}],
           checkPassword: [{required: true, message: "请确认密码", validator: validatePass2}],
         },
       }
     },
-    computed: { //
+    computed: {
       ...mapState(["isLogin"])
     },
     methods: {
@@ -182,6 +192,11 @@
       ]),
 
       onSubmit(values) { // 登录
+        // console.log(this.radio)
+        if (!this.radio) {
+          Toast('请阅读登录协议');
+          return
+        }
         this.Set_LoginForm(values);
         this.getUserInfo();
       },
@@ -193,8 +208,8 @@
         this.$router.push('/resetPassword')
       },
 
-      toPath(){
-        this.$router.push('/home')
+      toPath(url) {
+        this.$router.push(url)
       },
 
       tabChange: function () {
@@ -239,6 +254,7 @@
 <style scoped lang="scss">
   @import 'src/style/mixin';
   @import 'src/style/common';
+
   .signIn {
     background-color: #ffffff;
     header {
@@ -271,12 +287,32 @@
         }
       }
     }
+
     footer {
       @include cl;
+      text-align: center;
+      width: 220px;
       bottom: 40px;
-      span {
-        @include sw(500, #4A4A4A);
+      /deep/ .van-checkbox__label {
+        @include sw(500, #B9B9B9);
       }
+      span {
+        @include sw(500, #000);
+      }
+
+    }
+    .van-popup{
+      width: 75%;
+      padding:20px;
+      line-height: 24px;
+      text-align: left;
+      text-indent: 2em;
+      border-radius: 5px;
+      letter-spacing: 1.2px;
+
+    }
+    .privacy{
+      color: blue;
     }
 
   }

@@ -16,11 +16,13 @@
              v-model="value"
              shape="round"
              :placeholder="placeholderText"
-             :left-icon="require('../assets/Microphone.png')"
-             :right-icon="require('../assets/Find.png')"
+
              @click-right-icon="clickRight"
              @search="clickRight"
+
            />
+            <!--:left-icon="require('../assets/Microphone.png')"-->
+             <!--:right-icon="require('../assets/Find.png')"-->
         </form>
       </span>
       <span v-show="rightIconShow !== false" class="textRight"> <van-icon name="comment-o"/> </span>

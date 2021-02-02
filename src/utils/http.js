@@ -9,22 +9,19 @@ import {Is_Login} from "../store/mutation-type";
 
 Vue.use(Toast);
 //请求超时120s
-axios.defaults.timeout = 120000;
+axios.defaults.timeout = 30000;
 //请求base url
 axios.defaults.baseURL = null;
 axios.defaults.withCredentials = true;//让axios携带cookie
 
 //设置post请求是的header信息
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-//
+
 // axios.defaults.transformRequest = [function (data) {
-//   console.log(data);
-//
 //   let ret = '';
 //   for (let it in data) {
 //     ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
 //   }
-//   console.log(ret);
 //   return ret
 // }];
 
@@ -50,12 +47,10 @@ axios.interceptors.response.use( // 响应数据设置
     if (response.data && ((typeof(data) == 'string') && (response.data.indexOf("系统异常") > -1))) {
       Toast(response.data);
     }
-
     if ((response.data instanceof Object) && !response.data.success && response.data.msg && (response.data.msg.indexOf("登录") != -1 || response.data.msg.indexOf("登陆") != -1)) {
 
       removelocalStorage("token");
       removelocalStorage("userInfo");
-
       router.push('/signIn');
     }
 

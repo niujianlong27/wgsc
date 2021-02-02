@@ -14,8 +14,8 @@
                   name="arrow-left"/>
       </span>
       <span style="position: absolute;right: 20px">
-        <van-icon size="18px"
-                  :name="require('../../assets/Share.png')"/>
+        <!--<van-icon size="18px"-->
+                  <!--:name="require('../../assets/Share.png')"/>-->
       </span>
 
       <van-swipe ref="swipes" @change="onChange">
@@ -311,8 +311,8 @@
     <footer>
       <van-goods-action>
         <van-goods-action-icon @click="clickStart" icon="star-o" text="收藏" :color="startColor"/>
-        <van-goods-action-icon icon="cart-o" color="#AAAAAA" text="购物车" @click="onClickIcon"/>
-        <van-goods-action-icon :icon="require('../../assets/kefu.png')" color="#AAAAAA" text="在线客服"/>
+        <van-goods-action-icon icon="cart-o" color="#AAAAAA" text="购物车" @click="toPathUrl('/shopCart')"/>
+        <van-goods-action-icon  @click="toPathUrl('/onlineService')" :icon="require('../../assets/kefu.png')" color="#AAAAAA" text="在线客服"/>
         <van-goods-action-button @click="addCart" type="warning" text="加入购物车"/>
         <van-goods-action-button type="danger" @click="toOrder" text="立即购买"/>
       </van-goods-action>
@@ -385,7 +385,7 @@
         images: [],
         addressData: [],//
         isJD: false,//判断京东商品
-        hasGoods: true
+        hasGoods: true // 判断有货无货
       }
     },
     methods: {
@@ -554,10 +554,10 @@
         });
 
       },
-
-      onClickIcon() { // 跳转购物车
-        this.$router.push({path: '/shopCart'})
+      toPathUrl(url){
+        this.$router.push({path: url})
       },
+
 
       clickStart() { // 加入收藏
         this.startColor = "#ffd01e";
@@ -616,7 +616,7 @@
         })
       },
 
-      checkJdFororder() {
+      checkJdFororder() { // 判断有货无货
         let params = {
           commodityArticleNo: this.goodsObj.commodityArticleNo,
           searchAreaCode: this.searchAreaCode

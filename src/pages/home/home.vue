@@ -19,11 +19,13 @@
             shape="round"
             background="transparent"
             placeholder="请输入商品品类、名称、供应商、品牌"
-            :left-icon="require('../../assets/Microphone.png')"
-            :right-icon="require('../../assets/Find.png')"
+
+
             @search="clickImg(searchValue)"
             @click-right-icon="clickImg(searchValue)"
           />
+          <!--:right-icon="require('../../assets/Find.png')"-->
+          <!--:left-icon="require('../../assets/Microphone.png')"-->
         </form>
       </nav>
       <van-swipe :stop-propagation="false" :autoplay="2000" indicator-color="white">
@@ -136,23 +138,40 @@
       </van-popup>
     </main>
     <foot></foot>
+
+    <van-dialog @cancel="dialogConfirm()" @confirm="dialogConfirm()" v-model="dialogShow" title="欢迎来到威购商城" show-cancel-button>
+      <div>
+        <h4>为了给您提供更好的服务，我们向您申请以下权限</h4>
+        <p>一、打开存储权限实现图片的缓存和使用，帮你降低流量消耗。</p>
+        <p>二、收集您的位置信息，提供商品推荐的服务。</p>
+        <p style="text-indent: 2em">1. 我们在提供产品或服务时，可能会收集、存储和使用下列与您有关的信息。如果您不提供相关信息，可能无法注册为我们的用户、成为我们的会员并享受我们提供的服务。 </p>
+
+        <p style="text-indent: 2em">
+          2.您在使用我们的产品或服务时，系统可能通过Cookies自动采集相关信息，例如您的网页浏览器信息、缓存记录等；以及您在使用我们服务时，我们可能通过设备定位功能收集到有关您的位置信息。您可以通过关闭定位功能，停止对您地理位置信息的收集。</p>
+        <p>您可以阅读完整版的<span class="privacy" @click="toPath('/privacyNotice')">《 隐私政策 》</span></p>
+      </div>
+
+
+    </van-dialog>
   </div>
 
 </template>
 
 <script>
   import {
-    Swipe, Notify, Search, Popup, Picker, Tab, Tabs, NoticeBar, Image, SwipeItem, Icon, Field, Grid, GridItem, CellGroup
+    Dialog, Swipe, Notify, Search, Popup, Picker, Tab, Tabs, NoticeBar,
+    Image, SwipeItem, Icon, Field, Grid, GridItem, CellGroup
   } from 'vant';
   import foot from '../../components/foot';
   import urls from '../../utils/urls';
   import http from '../../utils/http';
   import {mapState, mapMutations} from 'vuex'
 
-  import {setSessionStorage, getSessionStorage} from "../../config/Utils";
+  import {setSessionStorage,getlocalStorage,setlocalStorage, getSessionStorage} from "../../config/Utils";
 
   export default {
     components: {
+      [Dialog.Component.name]: Dialog.Component,
       [Popup.name]: Popup,
       [Picker.name]: Picker,
       [Swipe.name]: Swipe,
@@ -175,6 +194,7 @@
       return {
         messageCount: '',
         searchValue: '',
+        dialogShow: false,
         showArea: false,// 选择地区
         searchAreaName: "", // 选择地区缓存
         searchAreaCode: "", // 选择地区缓存
@@ -277,7 +297,9 @@
         }
         this.$router.push(url)
       },
-
+      dialogConfirm(){
+        setlocalStorage('notFirstOpen',true)
+      },
 
       getArea(level, code) { // 查询省市区乡
         http.post(urls.queryArea, {areaLevel: level, areaFid: code}).then(res => {
@@ -355,6 +377,9 @@
     },
 
     mounted() {
+      if (!getlocalStorage('notFirstOpen')) {
+        this.dialogShow = true;
+      }
       this.getNewList();// 查询最新共公告
       this.getNoticeType();
       this.getMessageCount();// 查询最新共公告书鲁昂
@@ -391,7 +416,23 @@
   @import 'src/style/mixin';
   @import 'src/style/common';
 
+  /deep/ .van-dialog__content {
+    text-align: left;
+    padding: 10px 15px;
+    max-height: 50vh;
+    overflow-y: auto;
+    p {
+      text-indent: 2em;
+      margin: 10px 0;
+    }
+  }
+
+  .privacy {
+    color: blue;
+  }
+
   .home {
+
     .search {
       margin: 0;
       .van-search__content {
