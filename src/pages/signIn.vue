@@ -98,7 +98,7 @@
     <footer v-show="hideshow">
 
       <!--<footer v-show="hideshow">-->
-      <van-checkbox label-disabled v-model="radio"><span>登录即同意 <span class="privacy" @click="toPath('/privacyNotice')">《 隐私政策 》</span></span></van-checkbox>
+      <van-checkbox label-disabled v-model="radio"><span>我已阅读并同意 <span class="privacy" @click="toPath('/privacyNotice')">《 隐私政策 》</span></span></van-checkbox>
       <!--</footer>-->
       <!--<template v-if="active == 0">-->
       <!--&lt;!&ndash;<span>用户登录手册</span>&ndash;&gt;-->
@@ -112,7 +112,7 @@
 </template>
 
 <script>
-  import {Tab, Icon, Tabs, Form, Field, Button, Toast, Checkbox, Popup} from 'vant';
+  import {Tab, Icon, Tabs, Dialog,Form, Field, Button, Toast, Checkbox, Popup} from 'vant';
   import {setlocalStorage, getlocalStorage, removelocalStorage} from '../config/Utils'
   import http from '../utils/http';
   import urls from '../utils/urls';
@@ -122,7 +122,8 @@
     name: "signIn",
     components: {
 
-      [Checkbox.name]: Checkbox,
+        [Dialog.name]: Dialog,
+        [Checkbox.name]: Checkbox,
       [Icon.name]: Icon,
       [Popup.name]: Popup,
       [Tab.name]: Tab,
@@ -154,7 +155,7 @@
         }
       };
       return {
-        radio: true,
+        radio: false,
         show: false,
         docmHeight: document.documentElement.clientHeight,  //默认屏幕高度
         showHeight: document.documentElement.clientHeight,   //实时屏幕高度
@@ -192,9 +193,11 @@
       ]),
 
       onSubmit(values) { // 登录
-        // console.log(this.radio)
         if (!this.radio) {
-          Toast('请阅读登录协议');
+          Dialog.alert({
+            message: '登录前请先阅读并同意相关协议',
+          }).then(() => {
+          });
           return
         }
         this.Set_LoginForm(values);
@@ -291,7 +294,7 @@
     footer {
       @include cl;
       text-align: center;
-      width: 220px;
+      width: 252px;
       bottom: 40px;
       /deep/ .van-checkbox__label {
         @include sw(500, #B9B9B9);

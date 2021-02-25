@@ -163,7 +163,6 @@
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
     background-color: #F5F5F5;
-
   }
 
   .slideleft-enter,
