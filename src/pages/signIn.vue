@@ -98,7 +98,7 @@
     <footer v-show="hideshow">
 
       <!--<footer v-show="hideshow">-->
-      <van-checkbox label-disabled v-model="radio"><span>我已阅读并同意 <span class="privacy" @click="toPath('/privacyNotice')">《 隐私政策 》</span></span></van-checkbox>
+      <van-checkbox label-disabled v-model="radio"><span style="font-size: 14px">我已阅读并同意<span class="privacy" @click="toPath('/privacyNotice')">《 隐私政策 》</span></span></van-checkbox>
       <!--</footer>-->
       <!--<template v-if="active == 0">-->
       <!--&lt;!&ndash;<span>用户登录手册</span>&ndash;&gt;-->
@@ -121,9 +121,8 @@
   export default {
     name: "signIn",
     components: {
-
-        [Dialog.name]: Dialog,
-        [Checkbox.name]: Checkbox,
+      [Dialog.name]: Dialog,
+      [Checkbox.name]: Checkbox,
       [Icon.name]: Icon,
       [Popup.name]: Popup,
       [Tab.name]: Tab,
@@ -132,7 +131,6 @@
       [Field.name]: Field,
       [Toast.name]: Toast,
       [Button.name]: Button,
-
     },
     data() {
       let validatePass = (value, rule) => {
@@ -225,7 +223,6 @@
       },
     },
     watch: {
-
       showHeight() { // 监听屏幕高度
         if (this.docmHeight > this.showHeight + 130) {
           this.hideshow = false
