@@ -52,7 +52,7 @@
     <template v-else>
       <div class="noGoods">
         <div>
-          <img style="width: 100%;height: 220px" src="../assets/cart.png" alt="">
+          <img style="width: 100%" src="../assets/cart.png" alt="">
           <p>你的购物车是空的</p>
         </div>
         <button @click="toPath('/home')">去逛逛</button>

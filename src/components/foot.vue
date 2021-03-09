@@ -4,7 +4,7 @@
       <van-tabbar-item v-for="(item, index) in tabbars"
                        :key="item.name" :to="item.path">
         <template #icon="props">
-          <img style="width: 26px" :src="props.active ? item.active : item.normal">
+          <img :src="props.active ? item.active : item.normal">
         </template>
       </van-tabbar-item>
     </van-tabbar>
@@ -75,7 +75,7 @@
         })();
       };
     },
-    activated(){
+    activated() {
       this.value = this.active;
     },
     watch: {
@@ -92,7 +92,8 @@
 
 <style scoped lang="scss">
 
-  /deep/ .van-tabbar-item__icon img{
+  /deep/ .van-tabbar-item__icon img {
     height: 23px;
+    width: 26px
   }
 </style>

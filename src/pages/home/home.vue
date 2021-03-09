@@ -35,16 +35,16 @@
             <img style="width: 100%;height: 100%" :src="image.url | imgSet"/>
           </template>
           <template v-else>
-            <img style="width: 100%" :src="image"/>
+            <img style="van-notice-barwidth: 100%" :src="image"/>
           </template>
         </van-swipe-item>
       </van-swipe>
     </header>
     <p class="swipe">
-      <van-notice-bar style="height: 30px;" @click.stop="toPath('/noticeCategory')" left-icon="volume"
+      <van-notice-bar  @click.stop="toPath('/noticeCategory')" left-icon="volume"
                       :scrollable="false" color="#1f1f1f" background="#ffffff">
         <van-swipe
-          style="height: 30px;line-height: 30px;"
+
           vertical
           class="notice-swipe"
           :autoplay="3000"
@@ -415,6 +415,15 @@
 <style scoped lang="scss">
   @import 'src/style/mixin';
   @import 'src/style/common';
+
+  .swipe .van-notice-bar{
+    height: 30px;
+  }
+
+  .notice-swipe{
+    height: 30px;
+    line-height: 30px;
+  }
 
   /deep/ .van-dialog__content {
     text-align: left;
