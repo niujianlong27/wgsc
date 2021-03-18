@@ -39,6 +39,8 @@
         <!--<p><span @click.stop="resetPassword">忘记密码?</span></p>-->
       </section>
 
+      <p class="tiText">提示：未注册威购商城的用户请先在电脑打开www.iewego.com 完成注册</p>
+
       <!--</van-tab>-->
 
 
@@ -255,6 +257,10 @@
   @import 'src/style/mixin';
   @import 'src/style/common';
 
+  .tiText{
+    font-size: 12px;
+    margin-top: 40px;
+  }
   .signIn {
     background-color: #ffffff;
     header {

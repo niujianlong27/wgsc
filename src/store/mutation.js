@@ -36,9 +36,7 @@ export default {
   [Set_hotImgs](state, active) { // 热门品牌
     state.hotImgs = active;
   },
- [Set_sceneSwipe](state, active) { // 热门品牌
+  [Set_sceneSwipe](state, active) { // 热门品牌
   state.sceneSwipe = active;
 }
-
-
 }

@@ -6,7 +6,7 @@
                 <van-icon :name="leftIcon"/>
                </template>
                <template v-else>
-                 <span  @click="clickAddress" ><van-icon name="location-o"/><span>{{this.address}}</span></span>
+                 <span  @click="clickAddress" ><van-icon  name="location-o"/><span>{{this.address}}</span></span>
 
                </template>
              </span>
@@ -25,7 +25,7 @@
              <!--:right-icon="require('../assets/Find.png')"-->
         </form>
       </span>
-      <span v-show="rightIconShow !== false" class="textRight"> <van-icon name="comment-o"/> </span>
+      <span v-show="rightIconShow !== false" class="textRight"> <van-icon :badge="messageCount" @click.stop="toPath('/moreMsg')"  name="comment-o"/> </span>
     </div>
   </nav>
 </template>
@@ -33,7 +33,8 @@
 <script>
   import {Search, Field, Icon} from 'vant';
   import {mapState} from 'vuex'
-
+  import http from '../utils/http';
+  import urls from '../utils/urls';
   export default {
     components: {
       [Field.name]: Field,
@@ -46,7 +47,8 @@
         leftIcon: this.licon,
         rightIconShow: this.riconShow,
         placeholderText: this.placeholder,
-        isJump:this.jump
+        isJump:this.jump,
+        messageCount:''
       }
     },
     props: {
@@ -74,7 +76,32 @@
     computed: {
       ...mapState(["address"])
     },
+    mounted(){
+      this.getMessageCount()
+    }
+    ,
     methods: {
+
+      toPath(url, data) {
+        if (data) {
+          this.$router.push({path: url, query: data}); //跳转地址设置
+          return
+        }
+        this.$router.push(url)
+      },
+
+      getMessageCount() {
+        http.get(urls.queryUserMessageCount, {domainCode: 'wg'}).then(res => {
+          if (res == '系统异常，请联系运营商！') {
+            this.messageCount = ''
+          } else {
+            this.messageCount = res
+          }
+        }).catch(err => {
+
+        })
+      },
+
       goReturn() {
         if (this.leftIcon) {
           this.$router.go(-1);
@@ -140,6 +167,7 @@
           /deep/ .van-icon {
             position: relative;
             top: 3px;
+            right: 10px;
           }
         }
       }

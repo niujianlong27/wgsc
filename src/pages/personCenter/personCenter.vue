@@ -28,7 +28,7 @@
             <p>{{userInfo ? userInfo.companyName : ' '}}</p>
           </template>
           <template v-else>
-            <p style="margin-top: 15px"><span @click="Jump('/signIn')">登录 / 注册</span></p>
+            <p style="margin-top: 15px"><span @click="Jump('/signIn')">登录</span></p>
           </template>
         </div>
       </section>

@@ -78,7 +78,7 @@
 
       getNotices() {
         http.get(urls.queryUserMessage, { // 查询最新公告
-          domainCode: 'beps',
+          domainCode: 'wg',
           page: this.page,
           rows: this.pageSize
         }).then(res => {

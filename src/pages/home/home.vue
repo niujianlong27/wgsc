@@ -359,7 +359,7 @@
       },
 
       getMessageCount() {
-        http.get(urls.queryUserMessageCount, {domainCode: 'beps'}).then(res => {
+        http.get(urls.queryUserMessageCount, {domainCode: 'wg'}).then(res => {
           if (res == '系统异常，请联系运营商！') {
             this.messageCount = ''
           } else {
